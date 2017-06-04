@@ -34,6 +34,9 @@ namespace PharmacyCore
 
             var connection = @"Server=DESKTOP-C1K94FK;Database=PharmacyCore;Trusted_Connection=True;";
             services.AddDbContext<PharmacyContext>(options => options.UseSqlServer(connection));
+
+            services.AddDbContext<PharmacyContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
