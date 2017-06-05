@@ -6,22 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using PharmacyCore.Dtos;
 using PharmacyCore.Repositories;
 using PharmacyCore.DBContexts;
+using PharmacyCore.Services;
 
 namespace PharmacyCore.Controllers
 {
     public class PharmacyController : Controller
     {
         private readonly PharmacyContext _context;
-        private readonly PharmacyRepository pharmacyRepository = new PharmacyRepository();
+        private readonly PharmacyService _pharmacyService;
 
         public PharmacyController(PharmacyContext context)
         {
             _context = context;
+            _pharmacyService = new PharmacyService();
         }
 
-        public ActionResult CreateMedicine([Bind(Prefix = "CreateBoardFormDto")] CreateMedicineDto dto)
+        public ActionResult CreateMedicine()
         {
-            return RedirectToAction("Index");
+            var viewModel = _pharmacyService.GetCreateMedicineViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult CreateMedicine([Bind(Prefix = "CreateMedicineDto")] CreateMedicineDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                _pharmacyService.CreateMedicine(dto, _context);
+            }
+            return RedirectToAction("CreateMedicine");
         }
 
         public IActionResult Index()
@@ -45,7 +58,7 @@ namespace PharmacyCore.Controllers
             };
 
             
-            pharmacyRepository.AddMedicine(medicine, _context);
+            //pharmacyRepository.AddMedicine(medicine, _context);
 
             return View();
         }

@@ -1,6 +1,7 @@
 ﻿using PharmacyCore.DBContexts;
 using PharmacyCore.Dtos;
 using PharmacyCore.Repositories;
+using PharmacyCore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,16 @@ namespace PharmacyCore.Services
         public void CreateMedicine(CreateMedicineDto dto, PharmacyContext context)
         {
             pharmacyRepository.AddMedicine(dto, context);
+        }
+
+        public CreateMedicineViewModel GetCreateMedicineViewModel()
+        {
+            var viewModel = new CreateMedicineViewModel()
+            {
+                CreateMedicineDto = new CreateMedicineDto()
+            };
+
+            return viewModel;
         }
     }
 }
