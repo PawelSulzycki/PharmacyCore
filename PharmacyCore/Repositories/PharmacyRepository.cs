@@ -26,5 +26,27 @@ namespace PharmacyCore.Repositories
             context.Medicines.Add(medicine);
             context.SaveChanges();
         }
+
+        public IEnumerable<MedicineDto> GetAllMedicine(PharmacyContext context)
+        {
+            var medicineDto = new List<MedicineDto>();  
+            foreach(var m in context.Medicines)
+            {
+                medicineDto.Add(new MedicineDto(m.Name, m.Manufacturer, m.DataExpiration));
+            }
+
+            return medicineDto;
+        }
+
+        public IEnumerable<MedicineDto> GetMedicine(PharmacyContext context, ConditionsMedicinesListDto dto)
+        {
+            var medicineDto = new List<MedicineDto>();
+            foreach(var m in context.Medicines.Where(m => m.Refunded == dto.Refunded && m.Perscription==dto.Perscription 
+                    && m.StorageMethod == dto.StorageMethod).ToList())
+            {
+                medicineDto.Add(new MedicineDto(m.Name, m.Manufacturer, m.DataExpiration));
+            }
+            return medicineDto;
+        }
     }
 }

@@ -32,5 +32,29 @@ namespace PharmacyCore.Services
 
             return viewModel;
         }
+
+        public IEnumerable<MedicineViewModel> GetAllMedicineViewModel(PharmacyContext context)
+        {
+            var medicineDto = pharmacyRepository.GetAllMedicine(context);
+            var viewModel = new List<MedicineViewModel>();
+            foreach (var m in medicineDto)
+            {
+                viewModel.Add(new MedicineViewModel(m.Name, m.Manufacturer, m.DataExpiration));
+            }
+
+            return viewModel;
+        }
+
+        public IEnumerable<MedicineViewModel> GetMedicineViewModel(PharmacyContext context, ConditionsMedicinesListDto dto)
+        {
+            var medicineDto = pharmacyRepository.GetMedicine(context, dto);
+            var viewModel = new List<MedicineViewModel>();
+            foreach (var m in medicineDto)
+            {
+                viewModel.Add(new MedicineViewModel(m.Name, m.Manufacturer, m.DataExpiration));
+            }
+
+            return viewModel;
+        }
     }
 }

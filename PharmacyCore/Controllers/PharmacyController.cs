@@ -37,6 +37,19 @@ namespace PharmacyCore.Controllers
             return RedirectToAction("CreateMedicine");
         }
 
+        public ActionResult Show()
+        {
+            var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Show([Bind(Prefix = "ConditionsMedicinesListDto")] ConditionsMedicinesListDto dto)
+        {
+            var viewModel = _pharmacyService.GetMedicineViewModel(_context, dto);
+            return View(viewModel);
+        }
+
         public IActionResult Index()
         {
             return View();
