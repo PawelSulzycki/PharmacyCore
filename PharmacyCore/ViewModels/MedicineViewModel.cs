@@ -29,7 +29,7 @@ namespace PharmacyCore.ViewModels
         [Display(Name = "Rodzaj przechowywania")]
         public string StorageMethod { get; set; }
 
-        public MedicineViewModel(int id, string name, string manufacurer, DateTime dataExpiration, bool refunded, bool perscription, string sorageMethod)
+        public MedicineViewModel(int id, string name, string manufacurer, DateTime dataExpiration, bool refunded, bool perscription, string storageMethod)
         {
             Id = id;
             Name = name;
@@ -37,7 +37,7 @@ namespace PharmacyCore.ViewModels
             DataExpiration = dataExpiration;
             Refunded = refunded;
             Perscription = perscription;
-            StorageMethod = StorageMethod;
+            StorageMethod = storageMethod;
         }
 
     }

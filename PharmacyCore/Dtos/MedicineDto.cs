@@ -21,7 +21,7 @@ namespace PharmacyCore.Dtos
 
         public bool Refunded { get; set; }
 
-        public MedicineDto(int id, string name, string manufacturer, DateTime dataExpriration, string storageMethod, bool perscription)
+        public MedicineDto(int id, string name, string manufacturer, DateTime dataExpriration, string storageMethod, bool perscription, bool refunded )
         {
             Id = id;
             Name = name;
@@ -29,6 +29,7 @@ namespace PharmacyCore.Dtos
             DataExpiration = dataExpriration;
             StorageMethod = storageMethod;
             Perscription = perscription;
+            Refunded = refunded;
         }
     }
 }

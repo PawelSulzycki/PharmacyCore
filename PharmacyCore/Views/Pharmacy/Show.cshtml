@@ -23,6 +23,15 @@
                     <th>
                         @Html.DisplayNameFor(m => m.DataExpiration)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Refunded)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Perscription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.StorageMethod)
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +45,16 @@
                             @Html.DisplayFor(m => item.Manufacturer)
                         </td>
                         <td>
-                            @Html.DisplayFor(m => item.DataExpiration)
+                            @Html.DisplayFor(m => item.DataExpiration, "{0:dd.MM.yyyy}")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Refunded)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Perscription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.StorageMethod)
                         </td>
                     </tr>
                 }

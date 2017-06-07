@@ -39,7 +39,7 @@ namespace PharmacyCore.Services
             var viewModel = new List<MedicineViewModel>();
             foreach (var m in medicineDto)
             {
-                viewModel.Add(new MedicineViewModel(m.Id,m.Name, m.Manufacturer, m.DataExpiration));
+                viewModel.Add(new MedicineViewModel(m.Id,m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
             }
 
             return viewModel;
@@ -51,7 +51,7 @@ namespace PharmacyCore.Services
             var viewModel = new List<MedicineViewModel>();
             foreach (var m in medicineDto)
             {
-                viewModel.Add(new MedicineViewModel(m.Id,m.Name, m.Manufacturer, m.DataExpiration));
+                viewModel.Add(new MedicineViewModel(m.Id,m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
             }
 
             return viewModel;
