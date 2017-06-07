@@ -8,8 +8,8 @@ using PharmacyCore.DBContexts;
 namespace PharmacyCore.Migrations
 {
     [DbContext(typeof(PharmacyContext))]
-    [Migration("20170604130629_CreateModel")]
-    partial class CreateModel
+    [Migration("20170606210359_createDatabase")]
+    partial class createDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,8 @@ namespace PharmacyCore.Migrations
                     b.Property<bool>("Perscription");
 
                     b.Property<double>("Price");
+
+                    b.Property<int>("Quantity");
 
                     b.Property<bool>("Refunded");
 

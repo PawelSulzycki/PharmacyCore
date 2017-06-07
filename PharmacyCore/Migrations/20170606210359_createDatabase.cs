@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace PharmacyCore.Migrations
 {
-    public partial class CreateModel : Migration
+    public partial class createDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,7 @@ namespace PharmacyCore.Migrations
                     Name = table.Column<string>(nullable: true),
                     Perscription = table.Column<bool>(nullable: false),
                     Price = table.Column<double>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
                     Refunded = table.Column<bool>(nullable: false),
                     StorageMethod = table.Column<string>(nullable: true),
                     Use = table.Column<string>(nullable: true)

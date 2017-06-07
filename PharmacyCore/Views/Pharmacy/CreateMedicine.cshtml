@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(m => m.CreateMedicineDto.DataExpiration)
-                    @Html.TextBoxFor(m => m.CreateMedicineDto.DataExpiration, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.DataExpiration, "{0:dd.MM.yyyy}", new { @class = "form -control" })
                 </div>
             </div>
             <div class="row">
@@ -55,6 +55,12 @@
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(m => m.CreateMedicineDto.Price)
                     @Html.TextBoxFor(m => m.CreateMedicineDto.Price, new { @class = "form-control", @type= "number" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Quantity)
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.Quantity, new { @class = "form-control", @type = "number" })
                 </div>
             </div>
             <div class="row">

@@ -28,5 +28,7 @@ namespace PharmacyCore.Models
         public bool Refunded { get; set; }
 
         public bool Perscription { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

@@ -50,6 +50,30 @@ namespace PharmacyCore.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Shop()
+        {
+            var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Shop([Bind(Prefix = "ShopDto")] ShopDto dto)
+        {
+            var medicine = _pharmacyService.GetMedicineById(_context, dto.IdMedicine);
+            if (dto.DeliveryMethod == "Wysylka" && medicine.StorageMethod== "Warunki chlodnicze")
+            {
+                ViewBag.Error = "Odbiór tylko osobisty, ponieważ lek jest przechowywany w warunkach chlodniczych";
+                var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+                return View(viewModel);
+            }else if(dto.DeliveryMethod == "Wysylka" && medicine.Perscription == true)
+            {
+                ViewBag.Error = "Odbiór tylko osobisty, ponieważ jest potrzebne okazanie recepty";
+                var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+                return View(viewModel);
+            }
+            return View("Successful");
+        }
+
         public IActionResult Index()
         {
             return View();

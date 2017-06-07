@@ -33,6 +33,9 @@ namespace PharmacyCore.Dtos
 
         [Display(Name = "Recepta")]
         public bool Perscription { get; set; }
+
+        [Display(Name = "Ilosc sztuk")]
+        public int Quantity { get; set; }
     }
     
 }

@@ -9,6 +9,8 @@ namespace PharmacyCore.ViewModels
 {
     public class MedicineViewModel
     {
+        public int Id { get; set; }
+
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
 
@@ -18,11 +20,24 @@ namespace PharmacyCore.ViewModels
         [Display(Name = "Data ważności")]
         public DateTime DataExpiration { get; set; }
 
-        public MedicineViewModel(string name, string manufacurer, DateTime dataExpiration)
+        [Display(Name = "Refundowane")]
+        public bool Refunded { get; set; }
+
+        [Display(Name = "Recepta")]
+        public bool Perscription { get; set; }
+
+        [Display(Name = "Rodzaj przechowywania")]
+        public string StorageMethod { get; set; }
+
+        public MedicineViewModel(int id, string name, string manufacurer, DateTime dataExpiration, bool refunded, bool perscription, string sorageMethod)
         {
+            Id = id;
             Name = name;
             Manufacturer = manufacurer;
             DataExpiration = dataExpiration;
+            Refunded = refunded;
+            Perscription = perscription;
+            StorageMethod = StorageMethod;
         }
 
     }

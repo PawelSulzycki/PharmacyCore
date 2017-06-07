@@ -31,6 +31,8 @@ namespace PharmacyCore.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<int>("Quantity");
+
                     b.Property<bool>("Refunded");
 
                     b.Property<string>("StorageMethod");

@@ -20,7 +20,8 @@ namespace PharmacyCore.Repositories
                 Price = dto.Price,
                 Refunded = dto.Refunded,
                 StorageMethod = dto.StorageMethod,
-                Use = dto.Use
+                Use = dto.Use,
+                Quantity = dto.Quantity
             };
 
             context.Medicines.Add(medicine);
@@ -32,7 +33,7 @@ namespace PharmacyCore.Repositories
             var medicineDto = new List<MedicineDto>();  
             foreach(var m in context.Medicines)
             {
-                medicineDto.Add(new MedicineDto(m.Name, m.Manufacturer, m.DataExpiration));
+                medicineDto.Add(new MedicineDto(m.Id,m.Name, m.Manufacturer, m.DataExpiration, m.StorageMethod, m.Perscription));
             }
 
             return medicineDto;
@@ -44,9 +45,16 @@ namespace PharmacyCore.Repositories
             foreach(var m in context.Medicines.Where(m => m.Refunded == dto.Refunded && m.Perscription==dto.Perscription 
                     && m.StorageMethod == dto.StorageMethod).ToList())
             {
-                medicineDto.Add(new MedicineDto(m.Name, m.Manufacturer, m.DataExpiration));
+                medicineDto.Add(new MedicineDto(m.Id, m.Name, m.Manufacturer, m.DataExpiration, m.StorageMethod, m.Perscription));
             }
             return medicineDto;
+        }
+
+        public MedicineDto GetMedicineById(PharmacyContext context, int id)
+        {
+            var medicineDataBase = context.Medicines.Single(m => m.Id == id);
+
+            return new MedicineDto(medicineDataBase.Id, medicineDataBase.Name, medicineDataBase.Manufacturer, medicineDataBase.DataExpiration, medicineDataBase.StorageMethod, medicineDataBase.Perscription);
         }
     }
 }
