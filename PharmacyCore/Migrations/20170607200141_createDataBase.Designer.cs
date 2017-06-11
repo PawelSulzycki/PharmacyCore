@@ -8,8 +8,8 @@ using PharmacyCore.DBContexts;
 namespace PharmacyCore.Migrations
 {
     [DbContext(typeof(PharmacyContext))]
-    [Migration("20170606210359_createDatabase")]
-    partial class createDatabase
+    [Migration("20170607200141_createDataBase")]
+    partial class createDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,30 @@ namespace PharmacyCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Medicines");
+                });
+
+            modelBuilder.Entity("PharmacyCore.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MedicineId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("PharmacyCore.Models.Order", b =>
+                {
+                    b.HasOne("PharmacyCore.Models.Medicine", "Medicine")
+                        .WithMany("Order")
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

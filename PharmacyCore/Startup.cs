@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
 using PharmacyCore.DBContexts;
 
 namespace PharmacyCore
@@ -32,11 +28,18 @@ namespace PharmacyCore
             // Add framework services.
             services.AddMvc();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdministrativeRoles", policy => policy.RequireRole("Admin", "Seller", "Supplier", "User"));
+            });
+
             var connection = @"Server=DESKTOP-C1K94FK;Database=PharmacyCore;Trusted_Connection=True;";
             services.AddDbContext<PharmacyContext>(options => options.UseSqlServer(connection));
 
             services.AddDbContext<PharmacyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

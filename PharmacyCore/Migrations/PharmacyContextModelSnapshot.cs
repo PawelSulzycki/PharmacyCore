@@ -43,6 +43,30 @@ namespace PharmacyCore.Migrations
 
                     b.ToTable("Medicines");
                 });
+
+            modelBuilder.Entity("PharmacyCore.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MedicineId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("PharmacyCore.Models.Order", b =>
+                {
+                    b.HasOne("PharmacyCore.Models.Medicine", "Medicine")
+                        .WithMany("Order")
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
         }
     }
 }

@@ -1,0 +1,83 @@
+﻿@model PharmacyCore.ViewModels.LoginViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="top-buffer"></div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Zaloguj sie</div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {
+                        <h4>Wprowadz nazwe urzytkownika i haslo</h4>
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(m => m.LoginDto.Name):
+                                @Html.TextBoxFor(m => m.LoginDto.Name, new { style = "display:inline;", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(m => m.LoginDto.Password):
+                                @Html.TextBoxFor(m => m.LoginDto.Password, new { style = "display:inline; margin-left: 6px;", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-primary" value="Zaloguj sie!" />
+                            </div>
+                        </div>
+
+                    }
+                    @*<section>
+                            <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                <h4>Use a local account to log in.</h4>
+                                <hr />
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="UserName" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="UserName" class="form-control" />
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="Password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="checkbox">
+                                            <label asp-for="RememberMe">
+                                                <input asp-for="RememberMe" />
+                                                @Html.DisplayNameFor(m => m.RememberMe)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <button type="submit" class="btn btn-primary">Log in</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</body>
+</html>

@@ -7,6 +7,7 @@ using PharmacyCore.Dtos;
 using PharmacyCore.Repositories;
 using PharmacyCore.DBContexts;
 using PharmacyCore.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PharmacyCore.Controllers
 {

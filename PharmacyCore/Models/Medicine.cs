@@ -16,7 +16,7 @@ namespace PharmacyCore.Models
         public string Manufacturer { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataExpiration { get; set; }
 
         public string StorageMethod { get; set; }
@@ -30,5 +30,7 @@ namespace PharmacyCore.Models
         public bool Perscription { get; set; }
 
         public int Quantity { get; set; }
+
+        public virtual ICollection<Order> Order { get; set; }
     }
 }
