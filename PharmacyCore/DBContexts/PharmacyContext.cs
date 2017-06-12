@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PharmacyCore.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PharmacyCore.DBContexts
 {
@@ -16,6 +12,7 @@ namespace PharmacyCore.DBContexts
         }
 
         public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<User> User { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

@@ -2,10 +2,7 @@
 using PharmacyCore.Dtos;
 using PharmacyCore.Repositories;
 using PharmacyCore.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PharmacyCore.Services
 {
@@ -39,7 +36,7 @@ namespace PharmacyCore.Services
             var viewModel = new List<MedicineViewModel>();
             foreach (var m in medicineDto)
             {
-                viewModel.Add(new MedicineViewModel(m.Id,m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
+                viewModel.Add(new MedicineViewModel(m.Id, m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
             }
 
             return viewModel;
@@ -51,7 +48,7 @@ namespace PharmacyCore.Services
             var viewModel = new List<MedicineViewModel>();
             foreach (var m in medicineDto)
             {
-                viewModel.Add(new MedicineViewModel(m.Id,m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
+                viewModel.Add(new MedicineViewModel(m.Id, m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
             }
 
             return viewModel;
@@ -60,6 +57,40 @@ namespace PharmacyCore.Services
         public MedicineDto GetMedicineById(PharmacyContext context, int id)
         {
             return pharmacyRepository.GetMedicineById(context, id);
+        }
+
+        public void CreateUser(UserDto dto, PharmacyContext context)
+        {
+            pharmacyRepository.AddUser(dto, context);
+        }
+
+        public IEnumerable<AdminViewModel> GetAllUser(PharmacyContext context)
+        {
+            var viewModel = new List<AdminViewModel>();
+
+            foreach (var item in pharmacyRepository.GetAllUser(context))
+            {
+                viewModel.Add(new AdminViewModel
+                {
+                    Name = item.Name,
+                    Surname = item.Surname,
+                    Login = item.Login,
+                    Role = item.Role,
+                    PhoneNumber = item.PhoneNumber
+                });
+            }
+
+            return viewModel;
+        }
+
+        public CreateUserViewModel GetCreateUserViewModel()
+        {
+            var viewModel = new CreateUserViewModel()
+            {
+                UserDto = new UserDto()
+            };
+
+            return viewModel;
         }
     }
 }

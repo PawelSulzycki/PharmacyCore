@@ -28,10 +28,10 @@ namespace PharmacyCore
             // Add framework services.
             services.AddMvc();
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdministrativeRoles", policy => policy.RequireRole("Admin", "Seller", "Supplier", "User"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("AdministrativeRoles", policy => policy.RequireRole("Admin", "Seller", "Supplier", "User"));
+            //});
 
             var connection = @"Server=DESKTOP-C1K94FK;Database=PharmacyCore;Trusted_Connection=True;";
             services.AddDbContext<PharmacyContext>(options => options.UseSqlServer(connection));
@@ -64,7 +64,7 @@ namespace PharmacyCore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pharmacy}/{action=Index}/{id?}");
+                    template: "{controller=Login}/{action=Login}/{id?}");
             });
         }
 

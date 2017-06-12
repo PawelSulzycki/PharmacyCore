@@ -55,5 +55,45 @@ namespace PharmacyCore.Repositories
 
             return new MedicineDto(medicineDataBase.Id, medicineDataBase.Name, medicineDataBase.Manufacturer, medicineDataBase.DataExpiration, medicineDataBase.StorageMethod, medicineDataBase.Perscription, medicineDataBase.Refunded);
         }
+
+        public void AddUser(UserDto dto, PharmacyContext context)
+        {
+            var user = new User
+            {
+                Name = dto.Name,
+                Surname = dto.Surname,
+                Login = dto.Login,
+                Password = dto.Password,
+                Role = dto.Role,
+                City = dto.City,
+                Street = dto.Street,
+                PhoneNumber = dto.PhoneNumber
+            };
+
+            context.User.Add(user);
+            context.SaveChanges();
+        }
+
+        public IEnumerable<UserDto> GetAllUser(PharmacyContext context)
+        {
+            var userDto = new List<UserDto>();
+
+            foreach (var u in context.User)
+            {
+                userDto.Add(new UserDto
+                {
+                    Name = u.Name,
+                    Surname = u.Surname,
+                    Login = u.Login,
+                    Password = u.Password,
+                    Role = u.Role,
+                    City = u.City,
+                    Street = u.Street,
+                    PhoneNumber = u.PhoneNumber
+                });
+            }
+
+            return userDto;
+        }
     }
 }

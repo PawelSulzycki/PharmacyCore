@@ -17,6 +17,10 @@ namespace PharmacyCore.Controllers
         [HttpPost]
         public ActionResult Login([Bind(Prefix ="LoginDto")] LoginDto dto)
         {
+            if(dto.Name=="Admin" && dto.Password == "Admin")
+            {
+                return RedirectToAction("Home", "Admin");
+            }
             return View();
         }
     }
