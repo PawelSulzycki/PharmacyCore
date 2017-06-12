@@ -22,7 +22,6 @@ namespace PharmacyCore.Dtos
         [Display(Name = "Hasło użytkownika")]
         public string Password { get; set; }
 
-        [Required]
         [Display(Name = "Rola użytkownika")]
         public string Role { get; set; }
 
