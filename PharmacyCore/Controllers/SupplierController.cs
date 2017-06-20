@@ -37,5 +37,18 @@ namespace PharmacyCore.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult AddQuantity()
+        {
+            var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddQuantity([Bind(Prefix = "QuantityDto")] QuantityDto dto)
+        {
+            _pharmacyService.UpdateQuantityInMedicine(_context, dto.Quantity, dto.MedicineId);
+            return RedirectToAction("Index");
+        }
     }
 }

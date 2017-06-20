@@ -163,5 +163,10 @@ namespace PharmacyCore.Services
 
             return viewModel;
         }
+
+        public void UpdateQuantityInMedicine(PharmacyContext context, int quantity, int medicineId)
+        {
+            pharmacyRepository.UpdateQuantityInMedicine(context, quantity, medicineId);
+        }
     }
 }

@@ -204,5 +204,15 @@ namespace PharmacyCore.Repositories
 
             return medicineDto;
         }
+
+        public void UpdateQuantityInMedicine(PharmacyContext context, int quantity, int medicineId)
+        {
+            var medicine = context.Medicines.Single(m => m.Id == medicineId);
+
+            medicine.Quantity = medicine.Quantity + quantity;
+
+            context.Medicines.Update(medicine);
+            context.SaveChanges();
+        }
     }
 }
