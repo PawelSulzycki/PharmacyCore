@@ -34,7 +34,7 @@ namespace PharmacyCore.Controllers
             if (ModelState.IsValid)
             {
                 _pharmacyService.CreateUser(dto, _context);
-                return RedirectToAction("Home");
+                return RedirectToAction("Index");
             }
             return View("CreateUser");
         }

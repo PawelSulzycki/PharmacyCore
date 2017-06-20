@@ -37,6 +37,10 @@ namespace PharmacyCore.Controllers
                 {
                     return RedirectToAction("Index", "Supplier");
                 }
+                else if (user.Role == "Sprzedawca")
+                {
+                    return RedirectToAction("Index", "Seller");
+                }
             }
             catch (InvalidOperationException exception)
             {

@@ -36,10 +36,11 @@ namespace PharmacyCore.Services
             var viewModel = new List<MedicineViewModel>();
             foreach (var m in medicineDto)
             {
-                viewModel.Add(new MedicineViewModel {
-                    Id= m.Id,
-                    DataExpiration =m.DataExpiration,
-                    Manufacturer =m.Manufacturer,
+                viewModel.Add(new MedicineViewModel
+                {
+                    Id = m.Id,
+                    DataExpiration = m.DataExpiration,
+                    Manufacturer = m.Manufacturer,
                     Name = m.Name,
                     Perscription = m.Perscription,
                     Refunded = m.Refunded,
@@ -131,7 +132,7 @@ namespace PharmacyCore.Services
 
                 viewModel.Add(new OrderViewModel
                 {
-                    Name= medicine.Name,
+                    Name = medicine.Name,
                     Price = item.Price,
                     DataOfOrder = item.DataOfOrder,
                     DeliveryMethod = item.DeliveryMethod,
@@ -167,6 +168,36 @@ namespace PharmacyCore.Services
         public void UpdateQuantityInMedicine(PharmacyContext context, int quantity, int medicineId)
         {
             pharmacyRepository.UpdateQuantityInMedicine(context, quantity, medicineId);
+        }
+
+        public IEnumerable<SellerOrderViewModel> GetAllOrderViewModel(PharmacyContext context)
+        {
+            var viewModel = new List<SellerOrderViewModel>();
+
+            foreach (var item in pharmacyRepository.GetAllOrder(context))
+            {
+                if (item.StatusOfOrder == "Zamówienie w czasie realizacji")
+                {
+                    var user = pharmacyRepository.GetUserById(context, item.UserID);
+                    var medicine = pharmacyRepository.GetMedicineById(context, item.MedicineId);
+
+                    viewModel.Add(new SellerOrderViewModel
+                    {
+                        DataOfOrder = item.DataOfOrder,
+                        DeliveryMethod = item.DeliveryMethod,
+                        Quantity = item.Quantity,
+                        UserName = user.Login,
+                        Name = medicine.Name,
+                        Id = item.Id
+                    });
+                }
+            }
+
+            return viewModel;
+        }
+        public void DoneOreder(PharmacyContext context, int orderId, int quantity)
+        {
+            pharmacyRepository.DoneOreder(context, orderId, quantity);
         }
     }
 }
