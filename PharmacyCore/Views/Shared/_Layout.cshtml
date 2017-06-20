@@ -29,15 +29,16 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Pharmacy" asp-action="Index" class="navbar-brand">PharmacyCore</a>
+                <a asp-area="" asp-controller="Login" asp-action="Login" class="navbar-brand" style="position: absolute; right: 0;">Wyloguj sie</a>
             </div>
-            @*<div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Pharmacy" asp-action="Index">Home</a></li>
-                        <li><a asp-area="" asp-controller="Pharmacy" asp-action="CreateMedicine">Dodaj lek</a></li>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li><a asp-area="" asp-controller="Login" asp-action="Login" style="position: absolute; right: 0;">Wyloguj sie</a></li>*@
+                    @*<li><a asp-area="" asp-controller="Pharmacy" asp-action="CreateMedicine">Dodaj lek</a></li>
                         <li><a asp-area="" asp-controller="Pharmacy" asp-action="Show">Wykaz leków</a></li>
-                        <li><a asp-area="" asp-controller="Pharmacy" asp-action="Shop">Kupic lek</a></li>
-                    </ul>
-                </div>*@
+                        <li><a asp-area="" asp-controller="Pharmacy" asp-action="Shop">Kupic lek</a></li>*@
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="container body-content">
