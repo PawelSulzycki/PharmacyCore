@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PharmacyCore.Dtos;
 using PharmacyCore.DBContexts;
+using PharmacyCore.Dtos;
 using PharmacyCore.Services;
+using System;
 
 namespace PharmacyCore.Controllers
 {
@@ -27,16 +24,27 @@ namespace PharmacyCore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login([Bind(Prefix ="LoginDto")] LoginDto dto)
+        public ActionResult Login([Bind(Prefix = "LoginDto")] LoginDto dto)
         {
-            var user = _pharmacyService.GetUserByNameAndPassword(_context, dto.Name, dto.Password);
+            try
+            {
+                var user = _pharmacyService.GetUserByNameAndPassword(_context, dto.Name, dto.Password);
+                if (user.Role == "Uzytkownik")
+                {
+                    return RedirectToAction("Index", "User", new { UserId = user.Id });
+                }
+                else if (user.Role == "Dostawca")
+                {
+                    return RedirectToAction("Index", "Supplier");
+                }
+            }
+            catch (InvalidOperationException exception)
+            {
+                if (dto.Name == "Admin" && dto.Password == "Admin")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
 
-            if(dto.Name=="Admin" && dto.Password == "Admin")
-            {
-                return RedirectToAction("Home", "Admin");
-            }else if(user.Role == "Uzytkownik")
-            {
-                return RedirectToAction("Home","User", new { UserId = user.Id });
             }
             return View();
         }

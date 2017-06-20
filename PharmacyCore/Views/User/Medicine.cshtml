@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    @using (Html.BeginForm("ListOfMedicine", "User", FormMethod.Post))
+    @using (Html.BeginForm("Medicine", "User", FormMethod.Post))
     {
         <div class="container">
             <h2>Wykaz leków</h2>
@@ -24,6 +24,9 @@
                             @Html.DisplayNameFor(m => m.DataExpiration)
                         </th>
                         <th>
+                            @Html.DisplayNameFor(m => m.Price)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(m => m.Refunded)
                         </th>
                         <th>
@@ -31,6 +34,9 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(m => m.StorageMethod)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Use)
                         </th>
                     </tr>
                 </thead>
@@ -48,6 +54,9 @@
                                 @Html.DisplayFor(m => item.DataExpiration, "{0:dd.MM.yyyy}")
                             </td>
                             <td>
+                                @Html.DisplayFor(m => item.Price)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(m => item.Refunded)
                             </td>
                             <td>
@@ -55,6 +64,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(m => item.StorageMethod)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Use)
                             </td>
                         </tr>
                     }

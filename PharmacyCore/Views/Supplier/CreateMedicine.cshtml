@@ -1,0 +1,102 @@
+﻿@model PharmacyCore.ViewModels.CreateMedicineViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("CreateMedicine", "Pharmacy", FormMethod.Post))
+        {
+            <div class="row">
+                <h3 class="col-md-12">Dodaj nowy lek</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Name)
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Manufacturer)
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.Manufacturer, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.DataExpiration)
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.DataExpiration, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.StorageMethod)
+                    @Html.DropDownListFor(m => m.CreateMedicineDto.StorageMethod, new SelectList(
+                        new[]
+                        {
+                            new {Value = "Warunki pokojowe", Text ="Warunki pokojowe"},
+                            new {Value = "Warunki chlodnicze", Text ="Warunki chlodnicze"},
+                        },
+                        "Value",
+                        "Text"
+                    ))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Use)
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.Use, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Price)
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.Price, new { @class = "form-control", @type = "number" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Quantity)
+                    @Html.TextBoxFor(m => m.CreateMedicineDto.Quantity, new { @class = "form-control", @type = "number" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Refunded)
+                    @Html.DropDownListFor(m => m.CreateMedicineDto.Refunded, new SelectList(
+                        new[]
+                        {
+                            new {Value = "true", Text ="Tak"},
+                            new {Value = "false", Text ="Nie"},
+                        },
+                        "Value",
+                        "Text"
+                    ))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.CreateMedicineDto.Perscription)
+                    @Html.DropDownListFor(m => m.CreateMedicineDto.Perscription, new SelectList(
+                        new[]
+                        {
+                            new {Value = "true", Text ="Tak"},
+                            new {Value = "false", Text ="Nie"},
+                        },
+                        "Value",
+                        "Text"
+                    ))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary" value="Zapisz" />
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -17,6 +17,10 @@ namespace PharmacyCore.Models
 
         public string StatusOfOrder { get; set; }
 
+        public double Price { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataOfOrder { get; set; }
 
         public int MedicineId { get; set; }

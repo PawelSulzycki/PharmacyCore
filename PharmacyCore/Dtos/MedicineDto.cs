@@ -21,15 +21,10 @@ namespace PharmacyCore.Dtos
 
         public bool Refunded { get; set; }
 
-        public MedicineDto(int id, string name, string manufacturer, DateTime dataExpriration, string storageMethod, bool perscription, bool refunded )
-        {
-            Id = id;
-            Name = name;
-            Manufacturer = manufacturer;
-            DataExpiration = dataExpriration;
-            StorageMethod = storageMethod;
-            Perscription = perscription;
-            Refunded = refunded;
-        }
+        public double Price { get; set; }
+
+        public int Quantity { get; set; }
+
+        public string Use { get; set; }
     }
 }

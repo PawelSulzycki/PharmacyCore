@@ -30,16 +30,14 @@ namespace PharmacyCore.ViewModels
         [Display(Name = "Rodzaj przechowywania")]
         public string StorageMethod { get; set; }
 
-        public MedicineViewModel(int id, string name, string manufacurer, DateTime dataExpiration, bool refunded, bool perscription, string storageMethod)
-        {
-            Id = id;
-            Name = name;
-            Manufacturer = manufacurer;
-            DataExpiration = dataExpiration;
-            Refunded = refunded;
-            Perscription = perscription;
-            StorageMethod = storageMethod;
-        }
+        [Display(Name = "Ilość dostepnych sztuk")]
+        public int Quantity { get; set; }
+
+        [Display(Name = "Cena")]
+        public double Price { get; set; }
+
+        [Display(Name = "Zastosowanie")]
+        public string Use { get; set; }
 
     }
 }

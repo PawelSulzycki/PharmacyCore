@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PharmacyCore.DBContexts;
-using PharmacyCore.Services;
 using PharmacyCore.Dtos;
+using PharmacyCore.Services;
+using System;
 
 namespace PharmacyCore.Controllers
 {
@@ -21,20 +18,20 @@ namespace PharmacyCore.Controllers
             _pharmacyService = new PharmacyService();
         }
 
-        public ActionResult Home(int UserId)
+        public ActionResult Index(int UserId)
         {
             _userId = UserId;
             return View();
         }
 
-        public ActionResult ListOfMedicine()
+        public ActionResult Medicine()
         {
-            var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+            var viewModel = _pharmacyService.GetAllMedicineForUserViewModel(_context);
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult ListOfMedicine([Bind(Prefix = "ConditionsMedicinesListDto")] ConditionsMedicinesListDto dto)
+        public ActionResult Medicine([Bind(Prefix = "ConditionsMedicinesListDto")] ConditionsMedicinesListDto dto)
         {
             var viewModel = _pharmacyService.GetMedicineViewModel(_context, dto);
             return View(viewModel);
@@ -65,8 +62,15 @@ namespace PharmacyCore.Controllers
             dto.UserID = _userId;
             dto.DataOfOrder = DateTime.Now;
             dto.StatusOfOrder = "Zamówienie w czasie realizacji";
+            dto.Price = dto.Quantity * medicine.Price;
             _pharmacyService.CreateOrder(dto, _context);
             return View("Successful");
+        }
+
+        public ActionResult Order()
+        {
+            var viewModel = _pharmacyService.GetAllOrderByUserIdViewModel(_context, _userId);
+            return View(viewModel);
         }
     }
 }

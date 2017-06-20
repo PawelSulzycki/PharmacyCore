@@ -13,6 +13,8 @@ namespace PharmacyCore.Dtos
 
         public string StatusOfOrder { get; set; }
 
+        public double Price { get; set; }
+
         public DateTime DataOfOrder { get; set; }
 
         public int MedicineId { get; set; }

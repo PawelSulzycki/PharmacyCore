@@ -1,6 +1,7 @@
 ﻿using PharmacyCore.DBContexts;
 using PharmacyCore.Dtos;
 using PharmacyCore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,7 +33,17 @@ namespace PharmacyCore.Repositories
             var medicineDto = new List<MedicineDto>();
             foreach (var m in context.Medicines)
             {
-                medicineDto.Add(new MedicineDto(m.Id, m.Name, m.Manufacturer, m.DataExpiration, m.StorageMethod, m.Perscription, m.Refunded));
+                medicineDto.Add(new MedicineDto {
+                    Id = m.Id,
+                    Manufacturer = m.Manufacturer,
+                    DataExpiration = m.DataExpiration,
+                    StorageMethod =m.StorageMethod,
+                    Perscription =m.Perscription,
+                    Refunded =m.Refunded,
+                    Price = m.Price,
+                    Quantity = m.Quantity,
+                    Name = m.Name
+                });
             }
 
             return medicineDto;
@@ -44,7 +55,18 @@ namespace PharmacyCore.Repositories
             foreach (var m in context.Medicines.Where(m => m.Refunded == dto.Refunded && m.Perscription == dto.Perscription
                      && m.StorageMethod == dto.StorageMethod).ToList())
             {
-                medicineDto.Add(new MedicineDto(m.Id, m.Name, m.Manufacturer, m.DataExpiration, m.StorageMethod, m.Perscription, m.Refunded));
+                medicineDto.Add(new MedicineDto
+                {
+                    Id = m.Id,
+                    Manufacturer = m.Manufacturer,
+                    DataExpiration = m.DataExpiration,
+                    StorageMethod = m.StorageMethod,
+                    Perscription = m.Perscription,
+                    Refunded = m.Refunded,
+                    Price = m.Price,
+                    Quantity = m.Quantity,
+                    Name = m.Name
+                });
             }
             return medicineDto;
         }
@@ -53,7 +75,17 @@ namespace PharmacyCore.Repositories
         {
             var medicineDataBase = context.Medicines.Single(m => m.Id == id);
 
-            return new MedicineDto(medicineDataBase.Id, medicineDataBase.Name, medicineDataBase.Manufacturer, medicineDataBase.DataExpiration, medicineDataBase.StorageMethod, medicineDataBase.Perscription, medicineDataBase.Refunded);
+            return new MedicineDto{
+                Id = medicineDataBase.Id,
+                Manufacturer = medicineDataBase.Manufacturer,
+                DataExpiration = medicineDataBase.DataExpiration,
+                StorageMethod = medicineDataBase.StorageMethod,
+                Perscription = medicineDataBase.Perscription,
+                Refunded = medicineDataBase.Refunded,
+                Price = medicineDataBase.Price,
+                Quantity = medicineDataBase.Quantity,
+                Name = medicineDataBase.Name
+            };
         }
 
         public void AddUser(UserDto dto, PharmacyContext context)
@@ -98,7 +130,7 @@ namespace PharmacyCore.Repositories
 
         public UserDto GetUserByNameAndPassword(PharmacyContext context, string name, string password)
         {
-            var userDataBase = context.Users.Single(x => x.Name==name && x.Password==password);
+            var userDataBase = context.Users.Single(x => x.Name == name && x.Password == password);
 
             return new UserDto
             {
@@ -115,7 +147,7 @@ namespace PharmacyCore.Repositories
             };
         }
 
-        public void AddOrder (OrderDto dto, PharmacyContext context)
+        public void AddOrder(OrderDto dto, PharmacyContext context)
         {
             var order = new Order
             {
@@ -124,11 +156,53 @@ namespace PharmacyCore.Repositories
                 Quantity = dto.Quantity,
                 DeliveryMethod = dto.DeliveryMethod,
                 DataOfOrder = dto.DataOfOrder,
-                StatusOfOrder = dto.StatusOfOrder
+                StatusOfOrder = dto.StatusOfOrder,
+                Price = dto.Price
             };
 
             context.Orders.Add(order);
             context.SaveChanges();
+        }
+
+        public IEnumerable<OrderDto> GetAllOrderByUserId(PharmacyContext context, int userId)
+        {
+            var orderDto = new List<OrderDto>();
+
+            foreach (var u in context.Orders.Where(x => x.UserID == userId))
+            {
+                orderDto.Add(new OrderDto
+                {
+                    UserID = u.UserID,
+                    MedicineId = u.MedicineId,
+                    DataOfOrder = u.DataOfOrder,
+                    DeliveryMethod = u.DeliveryMethod,
+                    Price = u.Price,
+                    Quantity = u.Quantity,
+                    StatusOfOrder = u.StatusOfOrder
+                });
+            }
+
+            return orderDto;
+        }
+
+        public IEnumerable<MedicineDto> GetAllMedicineForUser(PharmacyContext context)
+        {
+            var medicineDto = new List<MedicineDto>();
+            foreach (var m in context.Medicines.Where(x=>x.Quantity != 0 && x.DataExpiration > DateTime.Now.AddDays(30)))
+            {
+                medicineDto.Add(new MedicineDto
+                {
+                    Manufacturer = m.Manufacturer,
+                    DataExpiration = m.DataExpiration,
+                    StorageMethod = m.StorageMethod,
+                    Perscription = m.Perscription,
+                    Refunded = m.Refunded,
+                    Quantity = m.Quantity,
+                    Name = m.Name
+                });
+            }
+
+            return medicineDto;
         }
     }
 }

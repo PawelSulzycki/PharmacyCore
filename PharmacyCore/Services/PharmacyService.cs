@@ -36,7 +36,16 @@ namespace PharmacyCore.Services
             var viewModel = new List<MedicineViewModel>();
             foreach (var m in medicineDto)
             {
-                viewModel.Add(new MedicineViewModel(m.Id, m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
+                viewModel.Add(new MedicineViewModel {
+                    Id= m.Id,
+                    DataExpiration =m.DataExpiration,
+                    Manufacturer =m.Manufacturer,
+                    Name = m.Name,
+                    Perscription = m.Perscription,
+                    Refunded = m.Refunded,
+                    StorageMethod = m.StorageMethod,
+                    Quantity = m.Quantity
+                });
             }
 
             return viewModel;
@@ -48,7 +57,16 @@ namespace PharmacyCore.Services
             var viewModel = new List<MedicineViewModel>();
             foreach (var m in medicineDto)
             {
-                viewModel.Add(new MedicineViewModel(m.Id, m.Name, m.Manufacturer, m.DataExpiration, m.Refunded, m.Perscription, m.StorageMethod));
+                viewModel.Add(new MedicineViewModel
+                {
+                    Id = m.Id,
+                    DataExpiration = m.DataExpiration,
+                    Manufacturer = m.Manufacturer,
+                    Name = m.Name,
+                    Perscription = m.Perscription,
+                    Refunded = m.Refunded,
+                    StorageMethod = m.StorageMethod
+                });
             }
 
             return viewModel;
@@ -101,6 +119,49 @@ namespace PharmacyCore.Services
         public void CreateOrder(OrderDto dto, PharmacyContext context)
         {
             pharmacyRepository.AddOrder(dto, context);
+        }
+
+        public IEnumerable<OrderViewModel> GetAllOrderByUserIdViewModel(PharmacyContext context, int userId)
+        {
+            var viewModel = new List<OrderViewModel>();
+
+            foreach (var item in pharmacyRepository.GetAllOrderByUserId(context, userId))
+            {
+                var medicine = pharmacyRepository.GetMedicineById(context, item.MedicineId);
+
+                viewModel.Add(new OrderViewModel
+                {
+                    Name= medicine.Name,
+                    Price = item.Price,
+                    DataOfOrder = item.DataOfOrder,
+                    DeliveryMethod = item.DeliveryMethod,
+                    Quantity = item.Quantity,
+                    StatusOfOrder = item.StatusOfOrder
+                });
+            }
+
+            return viewModel;
+        }
+
+        public IEnumerable<MedicineViewModel> GetAllMedicineForUserViewModel(PharmacyContext context)
+        {
+            var medicineDto = pharmacyRepository.GetAllMedicineForUser(context);
+            var viewModel = new List<MedicineViewModel>();
+            foreach (var m in medicineDto)
+            {
+                viewModel.Add(new MedicineViewModel
+                {
+                    Manufacturer = m.Manufacturer,
+                    DataExpiration = m.DataExpiration,
+                    StorageMethod = m.StorageMethod,
+                    Perscription = m.Perscription,
+                    Refunded = m.Refunded,
+                    Quantity = m.Quantity,
+                    Name = m.Name
+                });
+            }
+
+            return viewModel;
         }
     }
 }
