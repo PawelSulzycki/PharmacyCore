@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PharmacyCore.Dtos
 {
     public class CreateMedicineDto
     {
-        private int Id { get; set; }
 
-        [Display(Name ="Nazwa")]
+        [Display(Name = "Nazwa")]
         public string Name { get; set; }
 
         [Display(Name = "Producent")]
         public string Manufacturer { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data ważności")]
         public DateTime DataExpiration { get; set; }
 
@@ -37,5 +34,5 @@ namespace PharmacyCore.Dtos
         [Display(Name = "Ilosc sztuk")]
         public int Quantity { get; set; }
     }
-    
+
 }

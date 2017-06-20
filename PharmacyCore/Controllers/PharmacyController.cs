@@ -83,17 +83,17 @@ namespace PharmacyCore.Controllers
         public IActionResult About()
         {
             
-            CreateMedicineDto medicine = new CreateMedicineDto()
-            {
-                DataExpiration = new DateTime(2017, 10, 1),
-                Manufacturer = "cos",
-                Name = "name",
-                Perscription = true,
-                Price = 20,
-                Refunded = true,
-                StorageMethod = "cos",
-                Use = "cos"
-            };
+            //CreateMedicineDto medicine = new CreateMedicineDto()
+            //{
+            //    DataExpiration = new DateTime(2017, 10, 1),
+            //    Manufacturer = "cos",
+            //    Name = "name",
+            //    Perscription = true,
+            //    Price = 20,
+            //    Refunded = true,
+            //    StorageMethod = "cos",
+            //    Use = "cos"
+            //};
 
             
             //pharmacyRepository.AddMedicine(medicine, _context);

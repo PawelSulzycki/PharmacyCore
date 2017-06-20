@@ -13,8 +13,13 @@ namespace PharmacyCore.Models
 
         public int Quantity { get; set; }
 
+
         public int MedicineId { get; set; }
 
         public Medicine Medicine { get; set; }
+
+        public int UserID { get; set; }
+
+        public User User { get; set; }
     }
 }

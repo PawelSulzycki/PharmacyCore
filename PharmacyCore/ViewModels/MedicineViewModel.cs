@@ -18,6 +18,7 @@ namespace PharmacyCore.ViewModels
         public string Manufacturer { get; set; }
 
         [Display(Name = "Data ważności")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DataExpiration { get; set; }
 
         [Display(Name = "Refundowane")]

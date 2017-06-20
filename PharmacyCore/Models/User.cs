@@ -26,5 +26,7 @@ namespace PharmacyCore.Models
         public string Street { get; set; }
 
         public int PhoneNumber { get; set; }
+
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

@@ -70,7 +70,7 @@ namespace PharmacyCore.Repositories
                 PhoneNumber = dto.PhoneNumber
             };
 
-            context.User.Add(user);
+            context.Users.Add(user);
             context.SaveChanges();
         }
 
@@ -78,7 +78,7 @@ namespace PharmacyCore.Repositories
         {
             var userDto = new List<UserDto>();
 
-            foreach (var u in context.User)
+            foreach (var u in context.Users)
             {
                 userDto.Add(new UserDto
                 {
@@ -94,6 +94,25 @@ namespace PharmacyCore.Repositories
             }
 
             return userDto;
+        }
+
+        public UserDto GetUserByNameAndPassword(PharmacyContext context, string name, string password)
+        {
+            var userDataBase = context.Users.Single(x => x.Name==name && x.Password==password);
+
+            return new UserDto
+            {
+                Id = userDataBase.Id,
+                Name = userDataBase.Name,
+                Surname = userDataBase.Surname,
+                Login = userDataBase.Login,
+                Password = userDataBase.Password,
+                Role = userDataBase.Role,
+                City = userDataBase.City,
+                Street = userDataBase.Street,
+                PhoneNumber = userDataBase.PhoneNumber
+
+            };
         }
     }
 }

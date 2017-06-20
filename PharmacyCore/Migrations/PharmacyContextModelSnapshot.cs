@@ -53,11 +53,15 @@ namespace PharmacyCore.Migrations
 
                     b.Property<int>("Quantity");
 
+                    b.Property<int>("UserID");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MedicineId");
 
-                    b.ToTable("Order");
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("PharmacyCore.Models.User", b =>
@@ -83,7 +87,7 @@ namespace PharmacyCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("PharmacyCore.Models.Order", b =>
@@ -91,6 +95,11 @@ namespace PharmacyCore.Migrations
                     b.HasOne("PharmacyCore.Models.Medicine", "Medicine")
                         .WithMany("Order")
                         .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PharmacyCore.Models.User", "User")
+                        .WithMany("Order")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

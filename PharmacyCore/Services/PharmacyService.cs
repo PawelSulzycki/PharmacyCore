@@ -92,5 +92,10 @@ namespace PharmacyCore.Services
 
             return viewModel;
         }
+
+        public UserDto GetUserByNameAndPassword(PharmacyContext context, string name, string password)
+        {
+            return pharmacyRepository.GetUserByNameAndPassword(context, name, password);
+        }
     }
 }

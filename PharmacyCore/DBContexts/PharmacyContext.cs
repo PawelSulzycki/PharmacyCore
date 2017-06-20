@@ -12,7 +12,9 @@ namespace PharmacyCore.DBContexts
         }
 
         public DbSet<Medicine> Medicines { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
