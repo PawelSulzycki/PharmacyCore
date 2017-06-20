@@ -8,9 +8,10 @@ using PharmacyCore.DBContexts;
 namespace PharmacyCore.Migrations
 {
     [DbContext(typeof(PharmacyContext))]
-    partial class PharmacyContextModelSnapshot : ModelSnapshot
+    [Migration("20170612194039_addTabelsOrder")]
+    partial class addTabelsOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -49,15 +50,9 @@ namespace PharmacyCore.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("DataOfOrder");
-
-                    b.Property<string>("DeliveryMethod");
-
                     b.Property<int>("MedicineId");
 
                     b.Property<int>("Quantity");
-
-                    b.Property<string>("StatusOfOrder");
 
                     b.Property<int>("UserID");
 

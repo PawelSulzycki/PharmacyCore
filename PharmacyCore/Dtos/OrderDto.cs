@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PharmacyCore.Models
+namespace PharmacyCore.Dtos
 {
-    public class Order
+    public class OrderDto
     {
-        [Key]
-        public int Id { get; set; }
-
         public int Quantity { get; set; }
 
         public string DeliveryMethod { get; set; }
@@ -21,10 +17,7 @@ namespace PharmacyCore.Models
 
         public int MedicineId { get; set; }
 
-        public Medicine Medicine { get; set; }
-
         public int UserID { get; set; }
 
-        public User User { get; set; }
     }
 }

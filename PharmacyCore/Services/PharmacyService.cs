@@ -97,5 +97,10 @@ namespace PharmacyCore.Services
         {
             return pharmacyRepository.GetUserByNameAndPassword(context, name, password);
         }
+
+        public void CreateOrder(OrderDto dto, PharmacyContext context)
+        {
+            pharmacyRepository.AddOrder(dto, context);
+        }
     }
 }

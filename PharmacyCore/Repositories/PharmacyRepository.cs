@@ -114,5 +114,21 @@ namespace PharmacyCore.Repositories
 
             };
         }
+
+        public void AddOrder (OrderDto dto, PharmacyContext context)
+        {
+            var order = new Order
+            {
+                UserID = dto.UserID,
+                MedicineId = dto.MedicineId,
+                Quantity = dto.Quantity,
+                DeliveryMethod = dto.DeliveryMethod,
+                DataOfOrder = dto.DataOfOrder,
+                StatusOfOrder = dto.StatusOfOrder
+            };
+
+            context.Orders.Add(order);
+            context.SaveChanges();
+        }
     }
 }

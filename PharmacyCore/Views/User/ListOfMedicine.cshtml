@@ -1,0 +1,109 @@
+﻿@model IEnumerable<PharmacyCore.ViewModels.MedicineViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    @using (Html.BeginForm("ListOfMedicine", "User", FormMethod.Post))
+    {
+        <div class="container">
+            <h2>Wykaz leków</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Manufacturer)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.DataExpiration)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Refunded)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Perscription)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.StorageMethod)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Manufacturer)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.DataExpiration, "{0:dd.MM.yyyy}")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Refunded)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Perscription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.StorageMethod)
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-12 form-inline">
+                    @Html.Label("Refundowany")
+                    @Html.DropDownList("ConditionsMedicinesListDto.Refunded", new SelectList(
+                     new[]
+                     {
+                            new {Value = "true", Text ="Tak"},
+                            new {Value = "false", Text ="Nie"},
+                            new {Value = "", Text ="Brak"},
+                     },
+                     "Value",
+                     "Text"
+                 ))
+                    @Html.Label("Recepta")
+                    @Html.DropDownList("ConditionsMedicinesListDto.Perscription", new SelectList(
+                     new[]
+                     {
+                            new {Value = "true", Text ="Tak"},
+                            new {Value = "false", Text ="Nie"},
+                            new {Value = "", Text ="Brak"},
+                     },
+                     "Value",
+                     "Text"
+                 ))
+                    @Html.Label("Rodzaj przechowywania")
+                    @Html.DropDownList("ConditionsMedicinesListDto.StorageMethod", new SelectList(
+                        new[]
+                        {
+                            new {Value = "Warunki pokojowe", Text ="Warunki pokojowe"},
+                            new {Value = "Warunki chlodnicze", Text ="Warunki chlodnicze"},
+                            new {Value = "null", Text ="Brak"},
+                        },
+                        "Value",
+                        "Text"
+                    ))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary" value="Szukaj" />
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

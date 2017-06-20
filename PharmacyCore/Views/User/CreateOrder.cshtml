@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PharmacyCore.ViewModels.MedicineViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("CreateOrder", "User", FormMethod.Post))
+        {
+            <div class="row">
+                <h3 class="col-md-12">Zamów lek</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.Label("Nazwa produktu:")
+                    @Html.DropDownList("OrderDto.MedicineId", new SelectList(Model.Select(x => new { Value = x.Id, Text = x.Name }), "Value", "Text"))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.Label("Ilosc sztuk")
+                    @Html.TextBox("OrderDto.Quantity", null, new { @class = "form-control", @type = "number" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.Label("Sposob dostarczenia")
+                    @Html.DropDownList("OrderDto.DeliveryMethod", new SelectList(
+                        new[]
+                        {
+                            new {Value = "Odbior osobisty", Text ="Odbior osobisty"},
+                            new {Value = "Wysylka", Text ="Wysylka"},
+                        },
+                        "Value",
+                        "Text"
+                    ))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary" value="Kup" />
+                </div>
+            </div>
+            @if (ViewBag.Error != null)
+            {
+                <h2 style="color:red">@ViewBag.Error</h2>
+            }
+        }
+    </div>
+    @*@Html.Label("Nazwa produktu:")
+        @Html.DropDownList("Name", new SelectList(Model.Select(x => new { Value = x.Id, Text = x.Name }), "Value", "Text"))*@
+</body>
+</html>
