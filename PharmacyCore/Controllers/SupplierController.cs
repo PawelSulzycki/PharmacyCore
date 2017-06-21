@@ -50,5 +50,11 @@ namespace PharmacyCore.Controllers
             _pharmacyService.UpdateQuantityInMedicine(_context, dto.Quantity, dto.MedicineId);
             return RedirectToAction("Index");
         }
+
+        public ActionResult DeleteMedicine(int id)
+        {
+            _pharmacyService.DeleteMedicine(_context, id);
+            return RedirectToAction("Index");
+        }
     }
 }

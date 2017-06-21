@@ -50,11 +50,10 @@ namespace PharmacyCore.Repositories
             return medicineDto;
         }
 
-        public IEnumerable<MedicineDto> GetMedicine(PharmacyContext context, ConditionsMedicinesListDto dto)
+        public IEnumerable<MedicineDto> GetAllMedicineByUser(PharmacyContext context)
         {
             var medicineDto = new List<MedicineDto>();
-            foreach (var m in context.Medicines.Where(m => m.Refunded == dto.Refunded && m.Perscription == dto.Perscription
-                     && m.StorageMethod == dto.StorageMethod).ToList())
+            foreach (var m in context.Medicines.Where(x => x.Quantity != 0 && x.DataExpiration > DateTime.Now.AddDays(30)))
             {
                 medicineDto.Add(new MedicineDto
                 {
@@ -67,6 +66,34 @@ namespace PharmacyCore.Repositories
                     Price = m.Price,
                     Quantity = m.Quantity,
                     Name = m.Name
+                });
+            }
+
+            return medicineDto;
+        }
+
+        public IEnumerable<MedicineDto> GetMedicine(PharmacyContext context, ConditionsMedicinesListDto dto)
+        {
+            var medicineDto = new List<MedicineDto>();
+            if (dto.StorageMethod == "brak")
+            {
+                return GetAllMedicineForUser(context);
+            }
+            foreach (var m in context.Medicines.Where(m => m.Refunded == dto.Refunded && m.Perscription == dto.Perscription
+                     && m.StorageMethod == dto.StorageMethod && m.Quantity != 0 && m.DataExpiration > DateTime.Now.AddDays(30)).ToList())
+            {
+                medicineDto.Add(new MedicineDto
+                {
+                    Id = m.Id,
+                    Manufacturer = m.Manufacturer,
+                    DataExpiration = m.DataExpiration,
+                    StorageMethod = m.StorageMethod,
+                    Perscription = m.Perscription,
+                    Refunded = m.Refunded,
+                    Price = m.Price,
+                    Quantity = m.Quantity,
+                    Name = m.Name,
+                    Use = m.Use
                 });
             }
             return medicineDto;
@@ -147,9 +174,9 @@ namespace PharmacyCore.Repositories
             };
         }
 
-        public UserDto GetUserByNameAndPassword(PharmacyContext context, string name, string password)
+        public UserDto GetUserByNameAndPassword(PharmacyContext context, string login, string password)
         {
-            var userDataBase = context.Users.Single(x => x.Name == name && x.Password == password);
+            var userDataBase = context.Users.Single(x => x.Login == login && x.Password == password);
 
             return new UserDto
             {
@@ -217,7 +244,8 @@ namespace PharmacyCore.Repositories
                     Perscription = m.Perscription,
                     Refunded = m.Refunded,
                     Quantity = m.Quantity,
-                    Name = m.Name
+                    Name = m.Name,
+                    Use = m.Use,
                 });
             }
 
@@ -296,6 +324,15 @@ namespace PharmacyCore.Repositories
 
             context.Users.Attach(user);
             context.Users.Remove(user);
+            context.SaveChanges();
+        }
+
+        public void DeleteMedicine(PharmacyContext context, int medicineId)
+        {
+            var medicine = context.Medicines.Single(x => x.Id == medicineId);
+
+            context.Medicines.Attach(medicine);
+            context.Medicines.Remove(medicine);
             context.SaveChanges();
         }
 

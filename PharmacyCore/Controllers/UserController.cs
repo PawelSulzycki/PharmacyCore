@@ -39,7 +39,7 @@ namespace PharmacyCore.Controllers
 
         public ActionResult CreateOrder()
         {
-            var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+            var viewModel = _pharmacyService.GetAllMedicineByUserViewModel(_context);
             return View(viewModel);
         }
 

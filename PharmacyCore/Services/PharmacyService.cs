@@ -45,7 +45,33 @@ namespace PharmacyCore.Services
                     Perscription = m.Perscription,
                     Refunded = m.Refunded,
                     StorageMethod = m.StorageMethod,
-                    Quantity = m.Quantity
+                    Quantity = m.Quantity,
+                    Price = m.Price,
+                    Use = m.Use
+                });
+            }
+
+            return viewModel;
+        }
+
+        public IEnumerable<MedicineViewModel> GetAllMedicineByUserViewModel(PharmacyContext context)
+        {
+            var medicineDto = pharmacyRepository.GetAllMedicineByUser(context);
+            var viewModel = new List<MedicineViewModel>();
+            foreach (var m in medicineDto)
+            {
+                viewModel.Add(new MedicineViewModel
+                {
+                    Id = m.Id,
+                    DataExpiration = m.DataExpiration,
+                    Manufacturer = m.Manufacturer,
+                    Name = m.Name,
+                    Perscription = m.Perscription,
+                    Refunded = m.Refunded,
+                    StorageMethod = m.StorageMethod,
+                    Quantity = m.Quantity,
+                    Price = m.Price,
+                    Use = m.Use
                 });
             }
 
@@ -66,7 +92,10 @@ namespace PharmacyCore.Services
                     Name = m.Name,
                     Perscription = m.Perscription,
                     Refunded = m.Refunded,
-                    StorageMethod = m.StorageMethod
+                    StorageMethod = m.StorageMethod,
+                    Use = m.Use,
+                    Price = m.Price,
+                    Quantity = m.Quantity
                 });
             }
 
@@ -116,9 +145,9 @@ namespace PharmacyCore.Services
             return viewModel;
         }
 
-        public UserDto GetUserByNameAndPassword(PharmacyContext context, string name, string password)
+        public UserDto GetUserByNameAndPassword(PharmacyContext context, string login, string password)
         {
-            return pharmacyRepository.GetUserByNameAndPassword(context, name, password);
+            return pharmacyRepository.GetUserByNameAndPassword(context, login, password);
         }
 
         public void CreateOrder(OrderDto dto, PharmacyContext context)
@@ -162,7 +191,8 @@ namespace PharmacyCore.Services
                     Perscription = m.Perscription,
                     Refunded = m.Refunded,
                     Quantity = m.Quantity,
-                    Name = m.Name
+                    Name = m.Name,
+                    Use = m.Use
                 });
             }
 
@@ -210,7 +240,7 @@ namespace PharmacyCore.Services
 
             return new InformationSellerViewModel
             {
-                Name= user.Name,
+                Name = user.Name,
                 Surname = user.Surname,
                 City = user.City,
                 PhoneNumber = user.PhoneNumber,
@@ -221,6 +251,11 @@ namespace PharmacyCore.Services
         public void DeleteUser(PharmacyContext context, int id)
         {
             pharmacyRepository.DeleteUser(context, id);
+        }
+
+        public void DeleteMedicine(PharmacyContext context, int medicineId)
+        {
+            pharmacyRepository.DeleteMedicine(context, medicineId);
         }
     }
 }
