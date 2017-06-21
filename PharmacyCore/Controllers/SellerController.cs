@@ -30,5 +30,11 @@ namespace PharmacyCore.Controllers
             _pharmacyService.DoneOreder(_context, orderId, quantity);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Information(int id)
+        {
+            var viewModel = _pharmacyService.InformationSellerViewModel(_context, id);
+            return View(viewModel);
+        }
     }
 }

@@ -116,6 +116,7 @@ namespace PharmacyCore.Repositories
             {
                 userDto.Add(new UserDto
                 {
+                    Id = u.Id,
                     Name = u.Name,
                     Surname = u.Surname,
                     Login = u.Login,
@@ -269,6 +270,32 @@ namespace PharmacyCore.Repositories
 
             context.Orders.Update(order);
 
+            context.SaveChanges();
+        }
+
+        public UserDto InformationSeller(PharmacyContext context, int id)
+        {
+            var order = context.Orders.Single(x => x.Id == id);
+
+            var user = context.Users.Single(x => x.Id == order.UserID);
+
+            return new UserDto
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                City = user.City,
+                Street = user.Street,
+                PhoneNumber = user.PhoneNumber
+
+            };
+        }
+
+        public void DeleteUser(PharmacyContext context, int id)
+        {
+            var user = context.Users.Single(x => x.Id == id);
+
+            context.Users.Attach(user);
+            context.Users.Remove(user);
             context.SaveChanges();
         }
 

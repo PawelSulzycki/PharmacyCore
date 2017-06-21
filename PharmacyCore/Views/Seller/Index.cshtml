@@ -52,6 +52,7 @@
                         </td>
                         <td>
                             <a asp-controller="Seller" asp-action="DoneOrder" asp-route-orderId="@item.Id" asp-route-quantity="@item.Quantity" class="btn btn-danger"> Zrealizuj zamowienie</a>
+                            <a asp-controller="Seller" asp-action="Information" asp-route-id="@item.Id" class="btn btn-info"> Odbiorca</a>
                             @*<a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.MedicineId" data-target="#modal-action-user" class="btn btn-danger">
                                     Zrealizuj zamowienie
                                 </a>*@

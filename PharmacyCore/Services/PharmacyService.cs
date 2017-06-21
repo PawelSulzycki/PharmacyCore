@@ -91,11 +91,15 @@ namespace PharmacyCore.Services
             {
                 viewModel.Add(new AdminViewModel
                 {
+                    Id = item.Id,
                     Name = item.Name,
                     Surname = item.Surname,
                     Login = item.Login,
+                    Password = item.Password,
                     Role = item.Role,
-                    PhoneNumber = item.PhoneNumber
+                    PhoneNumber = item.PhoneNumber,
+                    Street = item.Street,
+                    City = item.City
                 });
             }
 
@@ -198,6 +202,25 @@ namespace PharmacyCore.Services
         public void DoneOreder(PharmacyContext context, int orderId, int quantity)
         {
             pharmacyRepository.DoneOreder(context, orderId, quantity);
+        }
+
+        public InformationSellerViewModel InformationSellerViewModel(PharmacyContext context, int id)
+        {
+            var user = pharmacyRepository.InformationSeller(context, id);
+
+            return new InformationSellerViewModel
+            {
+                Name= user.Name,
+                Surname = user.Surname,
+                City = user.City,
+                PhoneNumber = user.PhoneNumber,
+                Street = user.Street
+            };
+        }
+
+        public void DeleteUser(PharmacyContext context, int id)
+        {
+            pharmacyRepository.DeleteUser(context, id);
         }
     }
 }

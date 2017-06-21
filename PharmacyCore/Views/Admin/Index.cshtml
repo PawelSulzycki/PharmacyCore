@@ -28,10 +28,22 @@
                         @Html.DisplayNameFor(m => m.Login)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(m => m.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Street)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(m => m.PhoneNumber)
                     </th>
                     <th>
                         @Html.DisplayNameFor(m => m.Role)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Akcja")
                     </th>
                 </tr>
             </thead>
@@ -49,10 +61,22 @@
                             @Html.DisplayFor(m => item.Login)
                         </td>
                         <td>
+                            @Html.DisplayFor(m => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Street)
+                        </td>
+                        <td>
                             @Html.DisplayFor(m => item.PhoneNumber)
                         </td>
                         <td>
                             @Html.DisplayFor(m => item.Role)
+                        </td>
+                        <td>
+                            <a asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-danger"> Usuń</a>
                         </td>
                     </tr>
                 }

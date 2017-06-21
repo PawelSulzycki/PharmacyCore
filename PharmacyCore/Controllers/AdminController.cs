@@ -38,5 +38,11 @@ namespace PharmacyCore.Controllers
             }
             return View("CreateUser");
         }
+
+        public ActionResult DeleteUser(int id)
+        {
+            _pharmacyService.DeleteUser(_context, id);
+            return RedirectToAction("Index");
+        }
     }
 }
