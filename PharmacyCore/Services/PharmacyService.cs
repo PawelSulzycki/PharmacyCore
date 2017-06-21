@@ -257,5 +257,10 @@ namespace PharmacyCore.Services
         {
             pharmacyRepository.DeleteMedicine(context, medicineId);
         }
+
+        public int GetQuantity(PharmacyContext context, int medicineId)
+        {
+            return pharmacyRepository.GetQuantity(context, medicineId);
+        }
     }
 }

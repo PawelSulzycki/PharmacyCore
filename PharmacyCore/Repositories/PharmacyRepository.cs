@@ -336,6 +336,12 @@ namespace PharmacyCore.Repositories
             context.SaveChanges();
         }
 
+        public int GetQuantity(PharmacyContext context, int medicineId)
+        {
+            var medicine = context.Medicines.Single(x => x.Id == medicineId);
+            return medicine.Quantity;
+        }
+
 
     }
 }

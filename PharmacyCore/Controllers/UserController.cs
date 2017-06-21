@@ -47,6 +47,7 @@ namespace PharmacyCore.Controllers
         public ActionResult CreateOrder([Bind(Prefix = "OrderDto")] OrderDto dto)
         {
             var medicine = _pharmacyService.GetMedicineById(_context, dto.MedicineId);
+            var quantity = _pharmacyService.GetQuantity(_context, dto.MedicineId);
             if (dto.DeliveryMethod == "Wysylka" && medicine.StorageMethod == "Warunki chlodnicze")
             {
                 ViewBag.Error = "Odbiór tylko osobisty, poniewa¿ lek jest przechowywany w warunkach chlodniczych";
@@ -56,6 +57,11 @@ namespace PharmacyCore.Controllers
             else if (dto.DeliveryMethod == "Wysylka" && medicine.Perscription == true)
             {
                 ViewBag.Error = "Odbiór tylko osobisty, poniewa¿ jest potrzebne okazanie recepty";
+                var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
+                return View(viewModel);
+            }else if(dto.Quantity >= quantity)
+            {
+                ViewBag.Error = "Nie posiadamy tyle sztuk. Dostêpna iloœ :" + quantity;
                 var viewModel = _pharmacyService.GetAllMedicineViewModel(_context);
                 return View(viewModel);
             }

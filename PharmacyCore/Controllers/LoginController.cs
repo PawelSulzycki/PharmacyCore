@@ -50,6 +50,7 @@ namespace PharmacyCore.Controllers
                 }
 
             }
+            ViewBag.Error = "Niepoprawnie! Sprawdz nazwe i has³o !";
             return View();
         }
 
